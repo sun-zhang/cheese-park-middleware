@@ -1,16 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.ihangwei.ws</groupId>
-  <artifactId>wanke</artifactId>
-  <packaging>jar</packaging>
+  <groupId>com.hangwei</groupId>
+  <artifactId>wanke-middleware</artifactId>
+  <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>wanke webservice</name>
-  <url>http://www.ihangwei.com</url>
+  <name>wanke-middleware Maven Webapp</name>
+  <url>http://maven.apache.org</url>
 
   <properties>
     <cxf.version>2.2.3</cxf.version>
-    <!--<cxf.version>2.7.12</cxf.version>-->
+    <log4j.version>2.8.2</log4j.version>
+    <servlet-api.version>2.5</servlet-api.version>
+    <httpclient.version>4.3.6</httpclient.version>
   </properties>
 
   <dependencies>
@@ -24,33 +26,99 @@
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-frontend-jaxws</artifactId>
       <version>${cxf.version}</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>spring-core</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>geronimo-javamail_1.4_spec</artifactId>
+          <groupId>org.apache.geronimo.specs</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>geronimo-activation_1.1_spec</artifactId>
+          <groupId>org.apache.geronimo.specs</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>geronimo-jaxws_2.1_spec</artifactId>
+          <groupId>org.apache.geronimo.specs</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>geronimo-ws-metadata_2.0_spec</artifactId>
+          <groupId>org.apache.geronimo.specs</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-api</artifactId>
+      <version>${cxf.version}</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>spring-context</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-beans</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-core</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>geronimo-activation_1.1_spec</artifactId>
+          <groupId>org.apache.geronimo.specs</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>geronimo-annotation_1.0_spec</artifactId>
+          <groupId>org.apache.geronimo.specs</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>geronimo-stax-api_1.0_spec</artifactId>
+          <groupId>org.apache.geronimo.specs</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-transports-http</artifactId>
       <version>${cxf.version}</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>spring-web</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
-    <!-- Jetty is needed if you're are not using the CXFServlet -->
     <dependency>
-      <groupId>org.apache.cxf</groupId>
-      <artifactId>cxf-rt-transports-http-jetty</artifactId>
-      <version>${cxf.version}</version>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>${servlet-api.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j-impl</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>${httpclient.version}</version>
     </dependency>
   </dependencies>
   <build>
-    <finalName>wanke-webservice</finalName>
-      <plugins>
-          <!-- 解决某些依赖打包类型为 bundle 时, 打包失败的问题 -->
-          <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-compiler-plugin</artifactId>
-              <version>2.3.2</version>
-              <configuration>
-                  <source>1.7</source>
-                  <target>1.7</target>
-                  <showWarnings>true</showWarnings>
-              </configuration>
-          </plugin>
-      </plugins>
+    <finalName>wanke-middleware</finalName>
   </build>
 </project>
