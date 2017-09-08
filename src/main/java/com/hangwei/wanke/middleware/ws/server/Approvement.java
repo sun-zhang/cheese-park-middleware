@@ -22,6 +22,32 @@ public interface Approvement {
 
 
     /**
+     * 获取当前状态，当前步骤以及最后一个已经审批过的审批步骤信息
+     * @param strBSID
+     * @param strBOID
+     * @return
+     */
+    public ProcessInstanceInfo[] GetStatus(String[] strBSID, String[] strBOID);
+
+    /**
+     * 获取当前状态，当前步骤以及最后一个已经审批过的审批步骤信息
+     * @param strBSID
+     * @param strBOID
+     * @return
+     */
+    public ProcessInstanceInfo[] GetKindsStatus(String[] strBSID, String[] strBOID);
+
+    /**
+     * 获取所给对象ID的流程实例的所有已审批的步骤信息
+     * @param strBSID
+     * @param strBOID
+     * @param iProcInstID
+     * @return
+     */
+    public  ApproveStepInfo[] GetAllProcessedSteps(String strBSID, String strBOID, int iProcInstID);
+
+
+    /**
      * 创建审核流程
      * @param strBsid
      * @param strBoid
